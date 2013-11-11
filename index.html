@@ -50,8 +50,26 @@
             
   <div class="section" id="pyav">
 <h1>PyAV<a class="headerlink" href="#pyav" title="Permalink to this headline">¶</a></h1>
-<p>Pythonic bindings for FFmpeg/Libav.</p>
-<p>At least, they will be eventually.... In the future, we hope to represent the majority of these libraries in a Pythonic manner.</p>
+<p>This project aims to be a Pythonic binding for <a class="reference external" href="http://ffmpeg.org">FFmpeg</a> or <a class="reference external" href="http://libav.org">Libav</a>.</p>
+<p>Currently, it includes the basics for reading/writing audio and video. We aim to provide all of the power and control of the underlying library, but manage the gritty details for you as much as possible.</p>
+<div class="section" id="basic-demo">
+<h2>Basic Demo<a class="headerlink" href="#basic-demo" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">av</span>
+
+<span class="n">container</span> <span class="o">=</span> <span class="n">av</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&#39;/path/to/video.mp4&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">packet</span> <span class="ow">in</span> <span class="n">container</span><span class="o">.</span><span class="n">demux</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">packet</span><span class="o">.</span><span class="n">decode</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">frame</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s">&#39;video&#39;</span><span class="p">:</span>
+            <span class="n">frame</span><span class="o">.</span><span class="n">to_image</span><span class="p">()</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;/path/to/frame-</span><span class="si">%04d</span><span class="s">.jpg&#39;</span> <span class="o">%</span> <span class="n">frame</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installation-from-pypi">
+<h2>Installation from PyPI<a class="headerlink" href="#installation-from-pypi" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-python"><pre>$ pip install av</pre>
+</div>
+</div>
 <div class="section" id="building-from-source">
 <h2>Building From Source<a class="headerlink" href="#building-from-source" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><pre>$ git clone git@github.com:mikeboers/PyAV.git
@@ -63,8 +81,8 @@ $ make</pre>
 </div>
 <div class="section" id="ffmpeg-vs-libav">
 <h3>FFmpeg vs. Libav<a class="headerlink" href="#ffmpeg-vs-libav" title="Permalink to this headline">¶</a></h3>
-<p>We are attempting to write this wrapper to work with either <a class="reference external" href="http://ffmpeg.org">FFmpeg</a> or <a class="reference external" href="http://libav.org">Libav</a>. We are using <a class="reference external" href="http://docs.python.org/2/library/ctypes.html">ctypes</a> to detect the differences that we have descerned exist as this wrapper is being developed.</p>
-<p>This is a fairly trial-and-error process, so please let ud know if there are any odd compiler errors or something won&#8217;t link due to missing functions.</p>
+<p>We are attempting to write this wrapper to work with either <a class="reference external" href="http://ffmpeg.org">FFmpeg</a> or <a class="reference external" href="http://libav.org">Libav</a>. We are using <a class="reference external" href="http://docs.python.org/2/library/ctypes.html">ctypes</a> to detect the differences that we have discerned exist as this wrapper is being developed.</p>
+<p>This is a fairly trial-and-error process, so please let us know if there are any odd compiler errors or something won&#8217;t link due to missing functions.</p>
 </div>
 </div>
 </div>
@@ -89,6 +107,8 @@ $ make</pre>
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">PyAV</a><ul>
+<li><a class="reference internal" href="#basic-demo">Basic Demo</a></li>
+<li><a class="reference internal" href="#installation-from-pypi">Installation from PyPI</a></li>
 <li><a class="reference internal" href="#building-from-source">Building From Source</a><ul>
 <li><a class="reference internal" href="#ffmpeg-vs-libav">FFmpeg vs. Libav</a></li>
 </ul>

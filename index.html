@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="PyAV 0.1 documentation" href="#" />
-    <link rel="next" title="av.format: Contexts and Streams" href="api/format.html" /> 
+    <link rel="next" title="General" href="api.html" /> 
   </head>
   <body>
     <div class="related">
@@ -37,7 +37,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="api/format.html" title="av.format: Contexts and Streams"
+          <a href="api.html" title="General"
              accesskey="N">next</a> |</li>
         <li><a href="#">PyAV 0.1 documentation</a> &raquo;</li> 
       </ul>
@@ -51,8 +51,7 @@
   <div class="section" id="pyav">
 <h1>PyAV<a class="headerlink" href="#pyav" title="Permalink to this headline">¶</a></h1>
 <p>Pythonic bindings for FFmpeg/Libav.</p>
-<p>At least, they will be eventually. For now I&#8217;m working my way through some tutorials and writing them in Cython.</p>
-<p>In the future, I hope to represent the majority of these libraries in a Pythonic manner.</p>
+<p>At least, they will be eventually.... In the future, we hope to represent the majority of these libraries in a Pythonic manner.</p>
 <div class="section" id="building-from-source">
 <h2>Building From Source<a class="headerlink" href="#building-from-source" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-python"><pre>$ git clone git@github.com:mikeboers/PyAV.git
@@ -60,12 +59,12 @@ $ cd PyAV
 $ virtualenv venv
 $ . venv/bin/activate
 $ pip install cython pil
-$ make test</pre>
+$ make</pre>
 </div>
 <div class="section" id="ffmpeg-vs-libav">
 <h3>FFmpeg vs. Libav<a class="headerlink" href="#ffmpeg-vs-libav" title="Permalink to this headline">¶</a></h3>
-<p>I am attempting to write this wrapper to work with either <a class="reference external" href="http://ffmpeg.org/">FFmpeg</a> or <a class="reference external" href="http://libav.org/">Libav</a>. I am using autoconf to detect the differences that I have descerned exist as this wrapper is being developed.</p>
-<p>This is a fairly trial-and-error process, so please let me know if there are any odd compiler errors or something won&#8217;t link due to missing functions.</p>
+<p>We are attempting to write this wrapper to work with either <a class="reference external" href="http://ffmpeg.org">FFmpeg</a> or <a class="reference external" href="http://libav.org">Libav</a>. We are using <a class="reference external" href="http://docs.python.org/2/library/ctypes.html">ctypes</a> to detect the differences that we have descerned exist as this wrapper is being developed.</p>
+<p>This is a fairly trial-and-error process, so please let ud know if there are any odd compiler errors or something won&#8217;t link due to missing functions.</p>
 </div>
 </div>
 </div>
@@ -73,8 +72,10 @@ $ make test</pre>
 <h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="api/format.html"><tt class="docutils literal"><span class="pre">av.format</span></tt>: Contexts and Streams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="api/codec.html"><tt class="docutils literal"><span class="pre">av.codec</span></tt>: Codecs and Raw Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">General</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#module-av.video.stream">Video</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#module-av.audio.stream">Audio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html#module-av.subtitles.stream">Subtitles</a></li>
 </ul>
 </div>
 </div>
@@ -100,8 +101,8 @@ $ make test</pre>
 </ul>
 
   <h4>Next topic</h4>
-  <p class="topless"><a href="api/format.html"
-                        title="next chapter"><tt class="docutils literal"><span class="pre">av.format</span></tt>: Contexts and Streams</a></p>
+  <p class="topless"><a href="api.html"
+                        title="next chapter">General</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/index.txt"
@@ -134,7 +135,7 @@ $ make test</pre>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="api/format.html" title="av.format: Contexts and Streams"
+          <a href="api.html" title="General"
              >next</a> |</li>
         <li><a href="#">PyAV 0.1 documentation</a> &raquo;</li> 
       </ul>

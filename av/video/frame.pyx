@@ -231,7 +231,10 @@ cdef class VideoFrame(Frame):
         def __get__(self): return self.ptr.key_frame
 
     def to_image(self):
-        import PIL.Image
+        try:
+            import PIL.Image
+        except ImportError("To export video frames as images, either "
+                           "PIL or Pillow must be installed.")
         return PIL.Image.frombuffer("RGB", (self.width, self.height), self.to_rgb().planes[0], "raw", "RGB", 0, 1)
 
     def to_nd_array(self,colorspace="bgr24"):

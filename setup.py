@@ -7,6 +7,7 @@ from subprocess import Popen, PIPE
 import ctypes.util
 import errno
 import os
+import sys
 import re
 
 try:
@@ -19,34 +20,11 @@ version = '0.2.2'
 
 
 def library_config(name):
-    """Get distutils compatible extension extras for the given library.
-
-    When availible, this uses ``pkg-config``.
-
-    """
-
-    try:
-        proc = Popen(['pkg-config', '--cflags', '--libs', name], stdout=PIPE, stderr=PIPE)
-    except OSError:
-        print('pkg-config is required for building PyAV; aborting!')
-        exit(1)
-
-    raw_config, err = proc.communicate()
-    if proc.wait():
-        return
-
     config = {}
-    for chunk in str(raw_config).strip().split():
-        if chunk.startswith('-I'):
-            config.setdefault('include_dirs', []).append(chunk[2:])
-        elif chunk.startswith('-L'):
-            config.setdefault('library_dirs', []).append(chunk[2:])
-        elif chunk.startswith('-l'):
-            config.setdefault('libraries', []).append(chunk[2:])
-        elif chunk.startswith('-D'):
-            name = chunk[2:].split('=')[0]
-            config.setdefault('define_macros', []).append((name, None))
-
+    config.setdefault('include_dirs', []).extend([os.path.join(sys.prefix, 'include'), 'include'])
+    config.setdefault('library_dirs', []).append(os.path.join(sys.prefix, 'lib'))
+    config.setdefault('libraries', []).append(name[3:])
+    config.setdefault('define_macros', [])
     return config
 
 
@@ -54,30 +32,8 @@ def check_for_func(lib_names, func_name):
     """Define macros if we can find the given function in one of the given libraries."""
 
     for lib_name in lib_names:
-
-        lib_path = ctypes.util.find_library(lib_name)
-        if not lib_path:
-            continue
-
-        # Open the lib. Look in the path returned by find_library, but also all
-        # the paths returned by pkg-config (since we don't get an absolute path
-        # on linux).
-        lib_paths = [lib_path]
-        lib_paths.extend(
-            os.path.join(root, os.path.basename(lib_path))
-            for root in set(extension_extra.get('library_dirs', []))
-        )
-        for lib_path in lib_paths:
-            try:
-                lib = ctypes.CDLL(lib_path)
-                break
-            except OSError:
-                pass
-        else:
-            print('Could not find', lib_name, 'with ctypes; looked in:')
-            print('\n'.join('\t' + path for path in lib_paths))
-            continue
-
+        lib_path = os.path.join(sys.prefix, 'lib', 'lib{0}.dylib'.format(lib_name))
+        lib = ctypes.CDLL(lib_path)
         return hasattr(lib, func_name)
 
     else:
